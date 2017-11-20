@@ -11,7 +11,7 @@ model = VGG16(weights='imagenet')
 c = []
 for d in ['/device:GPU:0', '/device:GPU:1']:
     with tf.device(d):
-        img = image.load_img('picture_test/caty.jpeg', target_size=(224,224))
+        img = image.load_img('picture_test/test1.jpg', target_size=(224,224))
         x = image.img_to_array(img)
         #размерность
         x = np.expand_dims(x, axis=0)
