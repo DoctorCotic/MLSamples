@@ -53,8 +53,8 @@ for d in ['/device:GPU:0']:
     json_file.write(model_json)
     json_file.close()
 with tf.device('/cpu:0'):
-    sum = tf.device(c)
+    summary = tf.device(c)
 # Creates a session with log_device_placement set to True.
 sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
 # Runs the op.
-print(sess.run(sum))
+print(sess.run(summary))
