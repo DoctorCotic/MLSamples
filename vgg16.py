@@ -2,13 +2,13 @@ import os
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 
-from keras.applications.vgg16 import VGG16
+import keras.applications.vgg16
 from keras.preprocessing import image
 from keras.applications.vgg16 import preprocess_input, decode_predictions
 import numpy as np
 import tensorflow as tf
 
-model = VGG16(weights='imagenet')
+model = keras.applications.vgg16.VGG16(weights='imagenet')
 # грузим предварительно обученные веса
 c = []
 for d in ['/device:GPU:0', '/device:GPU:1']:
