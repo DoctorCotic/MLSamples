@@ -14,7 +14,7 @@ import tensorflow as tf
 begin_time = time.time()
 numpy.random.seed(42)
 c = []
-for d in ['/device:GPU:0']:
+for d in ['/device:GPU:0', '/device:GPU:1', '/device:GPU:2']:
     with tf.device(d):
         # There are 60 thousand images.  Fail with images and image tags
         (X_train, y_train), (X_test, y_test) = mnist.load_data()
