@@ -1,3 +1,4 @@
+import sys
 import os
 
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
@@ -11,11 +12,11 @@ import tensorflow as tf
 
 # NN recognizes handwritten figures
 # The algorithm receives an image and needs to recognize the correct digit
-begin_time = time.time()
-numpy.random.seed(42)
 c = []
-for d in ['/device:GPU:0', '/device:GPU:1', '/device:GPU:2']:
+for d in ['/device:GPU:0', '/device:GPU:1']:
     with tf.device(d):
+        begin_time = time.time()
+        numpy.random.seed(42)
         # There are 60 thousand images.  Fail with images and image tags
         (X_train, y_train), (X_test, y_test) = mnist.load_data()
 
@@ -53,9 +54,11 @@ for d in ['/device:GPU:0', '/device:GPU:1', '/device:GPU:2']:
         json_file = open("mnist_model.json", "w")
         json_file.write(model_json)
         json_file.close()
+
 with tf.device('/cpu:0'):
+    sum = tf.add_n(c)
     summary = tf.device(c)
 # Creates a session with log_device_placement set to True.
 sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
 # Runs the op.
-print(sess.run(summary))
+print(sess.run(sum))

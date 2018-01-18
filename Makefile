@@ -6,6 +6,7 @@ MNIST = "mnist"
 ISS = "iss"
 CONV = "conv"
 VGG16 = "vgg16"
+TEST = "test"
 
 mnist:
 	docker build -t sonm/${MNIST}-nn:latest -f ${MNIST}.Dockerfile .
@@ -21,6 +22,9 @@ conv:
 
 vgg16:
 	docker build -t sonm/${VGG16}-nn:latest -f ${VGG16}.Dockerfile .
+
+test:
+	docker build -t sonm/${TEST}-nn:latest -f ${TEST}.Dockerfile .
 
 
 
