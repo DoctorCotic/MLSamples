@@ -7,6 +7,7 @@ ISS = "iss"
 CONV = "conv"
 VGG16 = "vgg16"
 TEST = "test"
+CIFAR10 = "cifar19"
 
 mnist:
 	docker build -t sonm/${MNIST}-nn:latest -f ${MNIST}.Dockerfile .
@@ -25,6 +26,9 @@ vgg16:
 
 test:
 	docker build -t sonm/${TEST}-nn:latest -f ${TEST}.Dockerfile .
+
+cifar10:
+	docker build -t sonm/${CIFAR10}-nn:latest -f ${CIFAR10}.Dockerfile .
 
 
 
