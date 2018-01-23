@@ -12,7 +12,7 @@ import tensorflow as tf
 # NN recognizes handwritten figures
 # The algorithm receives an image and needs to recognize the correct digit
 c = []
-for d in ['/device:GPU:0', '/device:GPU:1']:
+for d in ['/device:GPU:0', '/device:GPU:1', '/device:GPU:3', '/device:GPU:4']:
     with tf.device(d):
         begin_time = time.time()
         numpy.random.seed(42)
@@ -54,10 +54,15 @@ for d in ['/device:GPU:0', '/device:GPU:1']:
         json_file.write(model_json)
         json_file.close()
 
-with tf.device('/cpu:0'):
-    sum = tf.add_n(c)
-    summary = tf.device(c)
+# this new line will create a new context manager telling TF to perform those actions on the GPU
+with tf.Session(config = tf.ConfigProto(log_device_placement=True)) as sess:
+	result = session.run(scores)
+	print(result)
+
+#with tf.device('/cpu:0'):
+#    sum = tf.add_n(c)
+#    summary = tf.device(c)
 # Creates a session with log_device_placement set to True.
-sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
+#sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
 # Runs the op.
-print(sess.run(sum))
+#print(sess.run(sum))
